@@ -1,0 +1,85 @@
+<script>
+    playerCount=0;
+    compCount=0;
+    function getComputerChoice(){
+        min = 0;
+        max = 2;
+        rNum = Math.floor(Math.random() * (max-min + 1) + min);
+        arr = ["Rock", "Paper", "Scissors"];
+        return arr[rNum];
+    }
+    function playRound(playerSelection, computerSelection){
+        if (playerSelection == "Rock" && computerSelection == "Scissors"){
+            playerCount = playerCount+1;
+            return "You Win! Rock Beats Scissors";
+            
+        }
+        else if (playerSelection == "Rock" && computerSelection == "Paper"){
+            compCount = compCount+1;
+            return "You Lose! Paper Beats Rock";
+            
+        }
+        else if (playerSelection == "Rock" && computerSelection == "Rock"){
+            playerCount= playerCount+1;
+            compCount = compCount+1;
+            return "You Draw! Rock Ties Rock";
+            
+        }
+        else if (playerSelection == "Paper" && computerSelection == "Scissors"){
+            compCount = compCount+1;
+            return "You Lose! Scissors Beats Paper";
+            
+        }
+        else if (playerSelection == "Paper" && computerSelection == "Rock"){
+            playerCount= playerCount+1;
+            return "You Win! Paper Beats Rock";
+            
+        }
+        else if (playerSelection == "Paper" && computerSelection == "Paper"){
+            playerCount= playerCount+1;
+            compCount = compCount+1;
+            return "You Draw! Paper Ties Paper";
+            
+        }
+        else if (playerSelection == "Scissors" && computerSelection == "Scissors"){
+            playerCount= playerCount+1;
+            compCount = compCount+1;
+            return "You Draw! Scissors Ties Scissors";
+
+        }
+        else if (playerSelection == "Scissors" && computerSelection == "Rock"){
+            compCount = compCount+1;
+            return "You Lose! Rock Beats Scissors";
+            
+        }
+        else if (playerSelection == "Scissors" && computerSelection == "Paper"){
+            playerCount= playerCount+1;
+            return "You Win! Scissors Beats Paper";
+            
+        }
+        else{
+            return "Error!"
+        }
+    }
+
+
+    function game(){
+        for (let i=0;i<5;i++){
+            playerSelection = prompt("What do you choose?");
+            computerSelection = getComputerChoice();
+            console.log(playRound(playerSelection, computerSelection));
+        }
+        if (playerCount>compCount){
+            return "You Win With A Score of " + playerCount + " to " + compCount;
+        }
+        else if (playerCount<compCount){
+            return "You Lose With A Score of " + playerCount + " to " + compCount;
+        }
+        else{
+            return "You Draw With A Score of " + playerCount + " to " + compCount;
+        }
+    }
+
+    console.log(game());
+
+</script>
