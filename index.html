@@ -1,6 +1,10 @@
+<!DOCTYPE html>
+<html>
+<body>
 <script>
     playerCount=0;
     compCount=0;
+    const displ = document.createElement('div');
     function getComputerChoice(){
         min = 0;
         max = 2;
@@ -11,65 +15,128 @@
     function playRound(playerSelection, computerSelection){
         if (playerSelection == "Rock" && computerSelection == "Scissors"){
             playerCount = playerCount+1;
-            return "You Win! Rock Beats Scissors";
+            console.log("You Win! Rock Beats Scissors");
             
         }
         else if (playerSelection == "Rock" && computerSelection == "Paper"){
             compCount = compCount+1;
-            return "You Lose! Paper Beats Rock";
+            console.log("You Lose! Paper Beats Rock");
             
         }
         else if (playerSelection == "Rock" && computerSelection == "Rock"){
             playerCount= playerCount+1;
             compCount = compCount+1;
-            return "You Draw! Rock Ties Rock";
+            console.log("You Draw! Rock Ties Rock");
             
         }
         else if (playerSelection == "Paper" && computerSelection == "Scissors"){
             compCount = compCount+1;
-            return "You Lose! Scissors Beats Paper";
+            console.log("You Lose! Scissors Beats Paper");
             
         }
         else if (playerSelection == "Paper" && computerSelection == "Rock"){
             playerCount= playerCount+1;
-            return "You Win! Paper Beats Rock";
+            console.log("You Win! Paper Beats Rock");
             
         }
         else if (playerSelection == "Paper" && computerSelection == "Paper"){
             playerCount= playerCount+1;
             compCount = compCount+1;
-            return "You Draw! Paper Ties Paper";
+            console.log("You Draw! Paper Ties Paper");
             
         }
         else if (playerSelection == "Scissors" && computerSelection == "Scissors"){
             playerCount= playerCount+1;
             compCount = compCount+1;
-            return "You Draw! Scissors Ties Scissors";
+            console.log("You Draw! Scissors Ties Scissors");
 
         }
         else if (playerSelection == "Scissors" && computerSelection == "Rock"){
             compCount = compCount+1;
-            return "You Lose! Rock Beats Scissors";
+            console.log("You Lose! Rock Beats Scissors");
             
         }
         else if (playerSelection == "Scissors" && computerSelection == "Paper"){
             playerCount= playerCount+1;
-            return "You Win! Scissors Beats Paper";
+            console.log("You Win! Scissors Beats Paper");
             
         }
         else{
-            return "Error!"
+            console.log("Error!");
         }
     }
 
 
-    function game(){
-        for (let i=0;i<5;i++){
-            playerSelection = prompt("What do you choose?");
+    
+        var btnR = document.createElement('BUTTON');
+        var btnP = document.createElement('BUTTON');
+        var btnS = document.createElement('BUTTON');
+
+        var btnRT = document.createTextNode("Rock");
+        btnR.appendChild(btnRT);
+        document.body.appendChild(btnR);
+
+        var btnPT = document.createTextNode("Paper");
+        btnP.appendChild(btnPT);
+        document.body.appendChild(btnP);
+
+        var btnST = document.createTextNode("Scissors");
+        btnS.appendChild(btnST);
+        document.body.appendChild(btnS);
+
+        const result = document.createElement('div');
+        const scr = document.createElement('div');
+
+        playerSelection = '';
+        btnR.addEventListener('click', () => {
+            playerSelection = "Rock";
             computerSelection = getComputerChoice();
-            console.log(playRound(playerSelection, computerSelection));
+            playRound(playerSelection, computerSelection);
+            scr.textContent = "Player Score = " + playerCount + " Computer Score = " + compCount;
+            endResult();
+        });
+        btnP.addEventListener('click', () => {
+            playerSelection = "Paper";
+            computerSelection = getComputerChoice();
+            playRound(playerSelection, computerSelection);
+            scr.textContent = "Player Score = " + playerCount + " Computer Score = " + compCount;
+            endResult();
+        });
+        btnS.addEventListener('click', () => {
+            playerSelection = "Scissors";
+            computerSelection = getComputerChoice();
+            playRound(playerSelection, computerSelection);
+            scr.textContent = "Player Score = " + playerCount + " Computer Score = " + compCount;
+            endResult();
+        });
+        
+        document.body.appendChild(scr);
+
+        function endResult(){
+            if (playerCount == 5 || compCount == 5){
+                document.body.removeChild(btnR);
+                document.body.removeChild(btnP);
+                document.body.removeChild(btnS);
+                document.body.removeChild(scr);
+                var rBTN = document.createElement("BUTTON");
+                var textRB = document.createTextNode("Play Again?");
+                rBTN.addEventListener('click', () => {
+                    document.location.reload(true);
+                });
+                rBTN.appendChild(textRB);
+                if (playerCount == 5){
+                    result.textContent = "You Won! Congratulations!"
+                    result.appendChild(rBTN);
+                    document.body.appendChild(result);
+                }
+                if (compCount == 5){
+                    result.textContent = "The Computer Won. Unlucky!"
+                    result.appendChild(rBTN);
+                    document.body.appendChild(result);
+            }
         }
-        if (playerCount>compCount){
+    }
+        /*if (playerCount>compCount){
             return "You Win With A Score of " + playerCount + " to " + compCount;
         }
         else if (playerCount<compCount){
@@ -77,9 +144,11 @@
         }
         else{
             return "You Draw With A Score of " + playerCount + " to " + compCount;
-        }
-    }
+        }*/
+        
 
-    console.log(game());
+   
 
 </script>
+</body>
+</html>
